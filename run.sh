@@ -20,7 +20,7 @@ fi
 
 VALID_FUNCTIONS="start|stop|restart"
 
-if ! echo $VALID_FUNCTIONS | grep -w $WERCKER_ORACLE_OCCS_CONTAINER_UTIL_FUNCTION > /dev/null; then
+if ! echo "$VALID_FUNCTIONS" | grep -w "$WERCKER_ORACLE_OCCS_CONTAINER_UTIL_FUNCTION" > /dev/null; then
     echo "Please specify valid container function: $VALID_FUNCTIONS"
     exit 1
 fi
@@ -62,7 +62,7 @@ export CONTAINERS=$(curl -sk -X "GET" -H "Authorization: Bearer ${BEARER_TOKEN}"
 if [ "$WERCKER_ORACLE_OCCS_CONTAINER_UTIL_DEBUG" = "true" ];
 then
     echo "==============================================="
-    echo $CONTAINERS
+    echo "$CONTAINERS"
     echo "==============================================="
 fi
 
