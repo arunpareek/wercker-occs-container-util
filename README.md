@@ -1,6 +1,8 @@
 # Step wercker-oracle-occs-container-util
 Wercker step to manage Oracle Container Cloud Service container.
 
+[![wercker status](https://app.wercker.com/status/55562054fe564292358e9eee599920b7/m "wercker status")](https://app.wercker.com/project/bykey/55562054fe564292358e9eee599920b7)
+
 # Options
 
 - `occs_user` user name for your Oracle Container Cloud Service (Console) account.
