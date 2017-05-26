@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ -z "$WERCKER_ORACLE_OCCS_CONTAINER_UTIL_REST_URL" ]];
+if [[ -z "$WERCKER_ORACLE_OCCS_CONTAINER_UTIL_REST_SERVER_URL" ]];
 then
   echo 'Please specify  Oracle Container Cloud Service Console (manager node) url.'
   exit 1
@@ -40,7 +40,7 @@ curl_request_body=$(< <(cat <<EOF
 EOF
 ))
 
-TOKEN=$(curl -sk "${WERCKER_ORACLE_OCCS_CONTAINER_UTIL_REST_URL}/api/auth" -d "$curl_request_body" | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["token"];')
+TOKEN=$(curl -sk "${WERCKER_ORACLE_OCCS_CONTAINER_UTIL_REST_SERVER_URL}/api/auth" -d "$curl_request_body" | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["token"];')
 
 if [ "$WERCKER_ORACLE_OCCS_CONTAINER_UTIL_DEBUG" = "true" ];
 then
@@ -49,7 +49,7 @@ fi
 
 # Get the Bearer token
 
-BEARER_TOKEN=$(curl -sk -H "Authorization: Session ${TOKEN}" "${WERCKER_ORACLE_OCCS_CONTAINER_UTIL_REST_URL}/api/token" | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["token"];')
+BEARER_TOKEN=$(curl -sk -H "Authorization: Session ${TOKEN}" "${WERCKER_ORACLE_OCCS_CONTAINER_UTIL_REST_SERVER_URL}/api/token" | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["token"];')
 
 if [ "$WERCKER_ORACLE_OCCS_CONTAINER_UTIL_DEBUG" = "true" ];
 then
@@ -57,7 +57,7 @@ then
 fi
 
 # Get container list
-export CONTAINERS=$(curl -sk -X "GET" -H "Authorization: Bearer ${BEARER_TOKEN}" "${WERCKER_ORACLE_OCCS_CONTAINER_UTIL_REST_URL}/api/v2/containers/")
+export CONTAINERS=$(curl -sk -X "GET" -H "Authorization: Bearer ${BEARER_TOKEN}" "${WERCKER_ORACLE_OCCS_CONTAINER_UTIL_REST_SERVER_URL}/api/v2/containers/")
 
 if [ "$WERCKER_ORACLE_OCCS_CONTAINER_UTIL_DEBUG" = "true" ];
 then
@@ -91,5 +91,5 @@ fi
 
 if [ -n "$CONTAINER_ID" ];
 then
-    curl -sk -X "POST" -H "Authorization: Bearer ${BEARER_TOKEN}" "${WERCKER_ORACLE_OCCS_CONTAINER_UTIL_REST_URL}/api/v2/containers/$CONTAINER_ID/$WERCKER_ORACLE_OCCS_CONTAINER_UTIL_FUNCTION"
+    curl -sk -X "POST" -H "Authorization: Bearer ${BEARER_TOKEN}" "${WERCKER_ORACLE_OCCS_CONTAINER_UTIL_REST_SERVER_URL}/api/v2/containers/$CONTAINER_ID/$WERCKER_ORACLE_OCCS_CONTAINER_UTIL_FUNCTION"
 fi
