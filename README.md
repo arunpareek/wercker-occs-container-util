@@ -24,17 +24,25 @@ Wercker step to manage Oracle Container Cloud Service container.
 	        occs_user: $OCCS_USERNAME
 	        occs_password: $OCCS_PASSWORD
 	        rest_server_url: $OCCS_REST_SERVER_URL
-	        function: restart
+	        function: stop
 			deployment_name: javacro17
 
 
-This will restart the running or stopped container has deployment name: `javacro17` on Oracle Container Cloud Service.
+This will stop the running container has deployment name: `javacro17` on Oracle Container Cloud Service.
 
 # peternagy/oracle-occs-container-util
 
 ## 0.0.1
 
 - Initial version
+
+## 0.0.2
+
+- REST_SERVER_URL parameter fix
+
+## 1.0.0
+
+- GA
 
 # License
 
